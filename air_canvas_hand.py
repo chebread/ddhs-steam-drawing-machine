@@ -5,6 +5,9 @@ import mediapipe as mp
 import time
 import os
 import HandTrack as htp
+import uuid
+import pyscreenshot as ImageGrab
+import asyncio
 
 # Set brush and eraser thickness for drawing
 brushthickness = 25
@@ -102,9 +105,14 @@ while True:
     # Display the canvas and image
     cv2.imshow("Image", img)
 
+
     # Wait for a key press (1ms) and exit loop if 'q' is pressed
     if cv2.waitKey(1) & 0xFF == ord('q'):
         cv2.imshow("Canvas", imgCanvas)
+        a = uuid.uuid1()
+        aStr = str(a.int)[0:10:1]
+        im = ImageGrab.grab()
+        im.save(f'{0}.png'.format(aStr))
         # (0): 스크린샷
         # (0): 저장
         # (0): break
