@@ -2,12 +2,16 @@
 import cv2
 import numpy as np
 import mediapipe as mp
-import time
 import os
 import HandTrack as htp
 import uuid
 import pyscreenshot as ImageGrab
-import asyncio
+
+def screenshot():
+    # 2020년 6월 1일 10시 20분 30초 -> _20200601_102030
+    curr_time = time.strftime("_%Y%m%d_%H%M%S")
+    img = ImageGrab.grab()
+    img.save("image{}.png".format(curr_time))  # image_20200601_102030 .png
 
 # Set brush and eraser thickness for drawing
 brushthickness = 25
@@ -20,7 +24,7 @@ xp, yp = 0, 0
 imgCanvas = np.zeros((720, 1280, 3), np.uint8)
 
 # Load overlay images for the drawing header
-folderPath = "Header"
+folderPath = "resources"
 myList = os.listdir(folderPath)
 overlaylist = []
 for inPath in myList:
@@ -105,17 +109,13 @@ while True:
     # Display the canvas and image
     cv2.imshow("Image", img)
 
-
     # Wait for a key press (1ms) and exit loop if 'q' is pressed
     if cv2.waitKey(1) & 0xFF == ord('q'):
         cv2.imshow("Canvas", imgCanvas)
-        a = uuid.uuid1()
-        aStr = str(a.int)[0:10:1]
-        im = ImageGrab.grab()
-        im.save(f'{0}.png'.format(aStr))
-        # (0): 스크린샷
-        # (0): 저장
-        # (0): break
+        # a = uuid.uuid1()
+        # aStr = str(a.int)[0:10:1]
+        # im = ImageGrab.grab()
+        # im.save('{name}.png'.format(name=aStr))
 
 # Clean up and close the OpenCV windows
 cv2.destroyAllWindows()
