@@ -1,11 +1,10 @@
 import cv2
 import numpy as np
-import mediapipe as mp
 import os
 import components.HandTrack as htp
 from utils.screenshot import screenshot
 
-brushthickness = 25
+brushthickness = 5
 eraserthickness = 100
 xp, yp = 0, 0
 imgCanvas = np.zeros((720, 1280, 3), np.uint8)
@@ -70,6 +69,7 @@ while True:
 	cv2.imshow("Image", img)
 	if cv2.waitKey(1) & 0xFF == ord('q'):
 		cv2.imshow("Canvas", imgCanvas)
+	if cv2.waitKey(1) & 0xFF == ord('s'):
 		screenshot()
 
 cv2.destroyAllWindows()
