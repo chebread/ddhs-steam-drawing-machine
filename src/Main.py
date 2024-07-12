@@ -3,6 +3,7 @@ import numpy as np
 import os
 import components.HandTrack as htp
 from utils.screenshot import screenshot
+from utils.invert import invert
 
 brushthickness = 5
 eraserthickness = 100
@@ -70,6 +71,7 @@ while True:
 	if cv2.waitKey(1) & 0xFF == ord('q'):
 		cv2.imshow("Canvas", imgCanvas)
 	if cv2.waitKey(1) & 0xFF == ord('s'):
-		screenshot()
+		fileName = screenshot()
+		outputImage = invert(fileName)
 
 cv2.destroyAllWindows()
